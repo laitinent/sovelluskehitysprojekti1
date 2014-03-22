@@ -55,6 +55,7 @@ public class NewServlet extends HttpServlet {
             String u = request.getParameter("user");
             String p = request.getParameter("programs");
             String d = request.getParameter("descriptions");
+            String pr = request.getParameter("priority");
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = null;
@@ -62,10 +63,11 @@ public class NewServlet extends HttpServlet {
                 Statement stmt = null;
                 stmt = con.createStatement();
                 
-                PreparedStatement statement = con.prepareStatement("INSERT INTO ohjelmat (user,programs,descriptions) VALUES (?,?,?)");
+                PreparedStatement statement = con.prepareStatement("INSERT INTO ohjelmat (user,programs,descriptions,priority) VALUES (?,?,?,?)");
                 statement.setString(1, u);
                 statement.setString(2, p);
                 statement.setString(3, d);
+                statement.setInt(4, pr);
                 statement.execute();
                 //stmt.executeUpdate("INSERT INTO ohjelmat (user,programs,descriptions) VALUES ('" + u + "','" + p + "','" + d + "')");
             } catch (SQLException ex) {
